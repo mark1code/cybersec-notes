@@ -1,0 +1,104 @@
+
+#####################################################################################################################################
+
+CONTAINERS
+
+A container is a package of software
+
+CLOUD COMPUTING
+
+NIST defn: "A model for enabling ubiquitous, convenient, on -demand network access to a shared pool of conifurable resources that can be rapidly provisioned and realed ewith minimal management effort or service provider interaction"
+Essential Characteristics:
+	On-demand self-service
+	Broad network access
+	Resource pooling
+	Rapid elasticity
+	Measured service
+Additional ISO characteristic:
+	Multi-tenacy
+
+OSSM - Online Self-service Scalable Measureable
+ 
+Cloud deployment models:
+
+Private
+	Exclusive use by a single organisation
+	On or off premises
+Community
+	Provisioned for exclusive use by a community of users
+Public
+	Open use by general public (free accounts)
+Hybrid 
+	Combination of two or more deployment models
+
+FEDERATED SERVICES
+
+Just In Time JIT Identiy provisioning
+	Real-time creation and provisioning of human and nonhuman user identities
+	Granting access at a specific moment in time with a specific set of privileges
+
+	Federated Identity forms the basis of many JIT implementations
+
+SAML Security Assertion Markup Language
+	Exchange authentication and authorisation messages between ID Provider and Service Provider
+	Service Provider makes a SAML request
+	Identity Provider makes a SAML response
+	Basis for web browser single sign-on
+	Limited to web-based applications
+
+OpenID Connect
+	Authentication protocol based on OAuth 2.0
+	RESFful / JSON message flows
+	Suitable web, other apps and mobile devices
+	ID only - no authorisation
+	Simple for devs to implement
+	Basis for authentication by Google, Facebook, Amazon, LinkedIn
+
+OAuth 2.0
+	Authorization and authentication
+
+
+
+SERVERLESS COMPUTING
+
+Abstracts the physical server, OS and application platform
+Only pay for actual computation
+Serverless Computing is event driven function execution
+Function as a Service (FaaS)
+Trigger -> Management -> Integrations
+Different services might have different maximum execution times
+
+Advantages:
+
+Abstraction of Computer REsources
+True "On-Demand"
+	Zero-use = zero-cost
+	Growth in cost is linear - predictable forecasting
+	Supports innovation - experiment and devlop at extremely low cost
+	Realistic load testing without need to maintain production sized environments
+	Production and non-production environments can be sized identically
+Near limitless Compute
+Rapidly Scalable
+No long-term OS state management
+Cloud service provider responsible for scurity of underlying execution platform
+
+Limitations:
+
+Statelessness
+Limited Execution Duration
+Limited Native Runtime Support
+Artefact size
+Cold-start time
+Concurrent execution limit
+Multitenancy - potential security and performance risks
+Compliance - not PCI DSS or HIPAA compliant
+Limited inbuilt visibility - use external ElasticSearch and Kibana dashboards for log analysis
+Application logs streamed to CloudWatch -> Lambda pulls CloudWatch logs and streams to ElasticSearch -> Kibana dashboards generated from ElasticSearch aggregated logs
+
+Serverless Framework
+
+Open source CLU for building and deploying serveerless apps
+A cli tool enabling users to easily configure and deplot event-driven functions in the cloud
+
+Users -> HTTPS -> AWS
+Devs -> Serverless CLI -> AWS

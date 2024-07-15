@@ -1,0 +1,112 @@
+#####################################################################################################################################
+
+LEGALITIES & ETHICS
+
+Computer Misuse Act 1990
+- Makes it an offence to access any computer to which you do not have an authorised right to use
+- Has provisions that state that the attempt does not need to have a specific target - as such, running a port scanner in an attempt to find insecure computers is an illegal act
+3 Criminal offenses:
+1 - Unauthorised access to computer material
+2 - Unauthorised access with intent to commit of facilitate commission of other offences
+3 - Unauthorised acts with intent to impair, or with recklessness as to impairing operation of computer
+3ZA - Unauthorised acts causing, or creating risk of serious damage
+3A - Making, supplying or obtaining articles for use in another computer misuse act offence
+
+Computer Misuse Act 1998
+- Unauthorised acts causing, or creating risk of serious damage
+- Territorial scope of computer misuse
+- Serious crime Prevention Orders
+
+Information Assurance vs Information Security
+IA
+The practice of assuring information, managing risks related to the use, processing, storage and transmision of information.
+IS
+A subcategory of IA, InfoSec is the practice of defending information from unauthorised access, use, disclosure, disruption, modification, perusal, inspection, recording or destruction.
+
+CIA : Confidentiality, Integrity, Availability
+- Ensuring information is not made available to unauthorised entities
+- Protecting the accuracy and compleness of assests
+- Property of being accessible and usable upon demand by an authorised entity
+
+Cryptographer = Defence / Cryptanalyst = Offense
+
+CyBOK - Cyber Security Body of Knowledge
+	A comprehensive Body of Knowledge to inform and underpin education and professional trianing for the cyber security sector
+
+People, Process, Technology
+- Seen as a foundation ofa successful IT system
+
+Defence in depth
+
+Layered approach to defences
+	Harder to gain access
+	Easier to detect issues
+Zero trust
+	Requires strict identity verification for every person and device whether inside or outside fo the network
+
+Complexity makes it hard to attack and manage.
+Security is as strong as the weakest link.
+
+Security boundaries
+Traditional security boundaries used to follow physical boundaries where all assets were in one location surrounded by physical protection. Modern organisations have blurred boundaries: cloud computing, home/mobile workers, shared platforms, outsourced services, BYOS, wireless networks.
+
+Defence through diversification
+
+User products from different manufacturers
+Use different versions of products throughout network
+	If all network components are the same, an attacker could breach them alll
+Defence through diversificaiton applies to physical and logical design
+	Use different encryption throught network
+	Use different browsers for interal/external access
+	Use different IP addresses for subnets (NAT between subnets)
+
+Comparmentalise network services and access
+
+Different physical servers for different roles: DNS, DHCP, Databases
+Restrict access to zones
+
+DMZ : De-Militarised Zone
+	An area of the network that is neither as secure as the internal network, nor as insecure as the public internet
+Contains the hosts that are most vulnerable to attack such as: e-mail, Web, DNS
+Limited connectivity to selected internal hosts
+Isolated by firewalls either side
+
+Redundant design
+Ensure you don't have a single-point-of-failure
+	Networks should have redundancy built in
+	Redundant systems replace live systems during incidents
+	High availability: when one service goes down, there is a built in system to compensate
+E.g: Power supplies, Serveres, Routers, Switches, Storage, Proxies, Buildings, Firewalls, Memory
+
+Separation of duties
+Primary reason is to prevent fraud and errors
+	Identify all tasks in a process
+	Identity milestone tasks
+	Identify users capable of executing tasks
+
+Concepts: Least privilege, Need to know, Comparamentalisation of data
+
+Zero trust principles: Verify, Least privilege, Continous monitoring and validation, Prevent lateral movement
+
+Frameworks and Guideance
+
+No two orgs are alike; implementing security needs to be tailored to each business.
+Some existing frameworks: ISO 27000 - Set of 15+ comprehensive docs relating to infosec, ITILv3, NIST standards, NCSC guidance
+Some frameworks are mandatory if orgs want to perform certain functions: Payment Card Industry - Data Security Standard (PCI-DSS)
+
+GDPR replaced Data Protection Act 1998.
+
+STRIDE : Spoofing, Tampering, Repudiation, Information disclosure, Denial of service and Elevation of privilege
+
+Data Management is a process which involves a broad range of activities including administrative and technical aspects of handling data.
+
+Spoofing, Tampering, Repudiation, Information disclosure, Denial of service and Elevation of privilege
+
+Vulnerabilities and Exploits:
+
+Zero Day Vulnerability - a recently discovered vulnerability that is not yet publicly known. When they become known, reusuable commodity attacks can be devloped.
+
+An exploit is the act of taking advantage of a vulnerability.
+
+Common Vulnerabilities and Exposures (CVE)
+

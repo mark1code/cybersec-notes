@@ -1,0 +1,48 @@
+#####################################################################################################################################
+
+Network Interfaces
+End User Device (EUD) needs a Network Interface Card (NIC)
+The NICs have an identifier known as a Media Access Control (MAC) address
+(6 pairs of hexadecimal values, also known as physical address)
+
+EUD connects to LAN:
+	- Cable from the NIC to a switch
+	- Wireless from the NIC to a Wireless Access Point (WAP)
+Home devices (routers) often have all these in one package
+
+Switches
+	- Read the destination MAC
+	- Compares the destination to switch lookup table
+	- Forward the frame to the port address
+	- Else forward to all
+	- For LANs
+Routers 
+	- Connects two or more networks to create an Internetwork
+	- Routers determine the destination networj by processing network address information in the data packet header
+	- Routers use network maps (routing tables) to determine the best route to send data
+	- Routers forward data packets to the interace which is connected to the determined route (forwarding)
+	- Use their own protools for exchanging route availability info: RIP, OSPF, IS-IS, BGP
+	- For WANs
+Internet : Network of networks
+Internet Exchange Point (IXP)
+
+IP address tells you: address where it's from and address 
+
+Personal Area Network (PAN) : Very small area network, 1.5cm - 3m. E.g. USB, Bluetooth, NFC, Wi-Fi, etc
+
+Packet switching:
+	Data to be delivered is broken into indiviudal packets
+		Addressing information in header
+	Packets may not follow same path
+	Network may be resistant to change and damage
+
+Layered network models
+
+Open Systems Interconnection (OSI) model: 7 layers
+Application, Presentation, Session, Transport, Network, Data-link, Physical
+A Application specific, P formatting and encryption, S connections between apps, T host-to-host data transfer, N routing and forwarding, D frames data for network, P sends and receives bits on network media 
+
+TCP/IP: 4 layers
+Application, Transport, Internet, Link
+Example: A HTTP, T TCP, I IP, L Ethernet
+

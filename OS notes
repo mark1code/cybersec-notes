@@ -1,0 +1,139 @@
+
+#####################################################################################################################################
+
+
+SID = Security ID
+S => value is SID
+1 => revision version
+5 => top level authority, 5 = NT Authority
+21 => Sub-Authority Value, 21 = user/domain
+1003 => RID
+
+RID = Relative ID
+500 = admin
+501 = guest
+512 = domain admin
+513 = domain user
+1000+ = user made account
+
+FILE SYSTEMS
+
+Hard drive manufactures perform low-level format of the disc surface to divide the disc into blocks that alow data to be written
+
+Operationg systems perform high-level format to build the file structure for the operationg system and data
+
+FAT = File Allocation Table
+	Each FAT entry contains one ofthe following:
+	Number of next cluster in the file, a marker indicating end of file, unused disk space, reserved areas.
+	Files are not necessarily deleted, but the pointer to the file is.
+
+NTFS = New Technology File System
+	Each file on an NTFS volume is represented by a record in the master file table (MFT)
+	NTFS resereves the first records of the MFT for special information
+
+$MFT - Describes all files on teh volume
+$MFTMirr - Mirror of the MFT
+$Boot - Contains bootstrap code
+$BadClus - Contains details of any clusters marked as bad
+$Secure - Contains details of the ACLs for files
+
+The MFT allocates for everyrecord.
+Small records (<512 byes) can be contained entirely within the MFT
+
+Multiple data streams = Alternate Data Streams (ADS)
+	Each stream name identifies a new data attribute on the file
+	Streams have separate opportunistic locks, file locks, and sizes, but common permissions
+	ADS can hold useful information about the file such as where a file was obtained.
+	
+	E.g If you download a file from the internet, it might be classed as a security risk. When you download the file with a browser such as MS Edge, Edge will add an entry to the ADS indicating this. When you execute the file, yo uget a wawrning that thte file might cause security issues.
+
+ADS have been used to hide malware and to hie senstivie data for exfiltraion.
+
+TYPES OF ACCESS CONTROL
+
+DAC = Discretionary Access Control
+	Access to a resource is at the discretion of the resource owner.
+	Most common form of access control in most environments
+MAC = Mandatory Access Control
+	Access to a resource is managed by the system.
+	Is typically implemented by Group Policy Objects GPO) in a Windows Domain
+IBAC = Identity Based Access Control
+	Access is granted based on some form of user ID
+RBAC = Role-Based Access Control
+	Access is granted based on the job-role performed by the user
+
+User access security
+
+DACL (Discretionary Access Control List)
+	In order to access a resource a user must be granted some form of allow permission
+		If no access is granted then teh suer is implicitly denied access
+	Users can also be explicity denied access
+		An explicit denial overrides any allow permissions granted on a resource
+
+Windows key files and folders
+
+Multiple files make up the OS
+Most are DLLs (Dynamic Link Library)
+	Small files shared by many larger programs
+	Makes programming easier and uses less space
+
+
+PROCESSES AND THREADS
+
+A process can be described as an executing application. Each application runs as one or more separate processes. This allows for dynamic allocation of memoru and CPU time. 
+Processes can contain many theads
+
+A thread is the basic unit to whic hthe OS allocates processor time
+A thread can execute any part of the process code, including parts currently being executed by another thread.
+Multiple threads fcan run simultaneously in multi-core processors
+Time Division Multiplexing swithces processor activity between threads
+Threads are generally cosnidered to be preemptive in execution - i.e. data is often pre-loaded into memory before it is required by the CPU.
+
+A thread may be interrupted at any time, which means data integrity could be a problem.
+A thread may be halted in the middle of updating a chucnk of data, leaving the integrity of the data in a bad way.
+
+LINUX
+
+Ownership and permissions
+
+User Files and folders in linux have permissions which are applied to:
+	Users of the object
+	Group members who may have access to the object
+	others 
+Permissions can be read, write, execute
+chmod is usesd to alter file permission
+chmod xyz, 0-7. x = me, y = group, z = others
+
+STDIN - standard input
+STDOUT - standard output
+STDERR - standard error
+
+Redirecting / Piping
+	Use the pipe metacharacter |
+	Does not create a temporary file
+The output of one process becomes input of another
+E.g. $ ps -ef | more
+	The stdout of the ps process becomes the stdin
+
+Linux uses Filesystem Hierarchy Standrad (FHS)
+	Contains defined foldre structure
+	Contains defined locations for many files
+
+BASH = Bourne Again SHell
+
+MOBILE OPERATING SYSTEMS
+
+IOS internal structure
+4 abstraction layers:
+Application,
+Cocoa Touch,
+Media,
+Core,
+Core OS
+
+Memory management
+Android is designed to manage processes to keep power consumption at a minim
+Inactive applications and processes are suspended
+	Suspended applications do not use battery power or CPU reserves
+
+overthewire.org/wargames/bandit
