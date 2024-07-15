@@ -1,4 +1,4 @@
-#####################################################################################################################################
+####################################################################################################################################
 
 Network Interfaces
 End User Device (EUD) needs a Network Interface Card (NIC)
@@ -45,4 +45,191 @@ A Application specific, P formatting and encryption, S connections between apps,
 TCP/IP: 4 layers
 Application, Transport, Internet, Link
 Example: A HTTP, T TCP, I IP, L Ethernet
+
+Ethernet
+Most popular LAN implementation:
+	Data transmitted in frames
+	Classed as a broadcast technology
+Ethernet variants (defined in IEEE standards): 10Base5, 1000BaseT, 1000BaseSX, 10000BaseT
+
+Network Layer Protocols
+
+Accept requests from the Transport layer
+Pass requests to the Data Link layer
+Responsible for end-to-end data delivery
+Responsible for logical addressing of data packets
+
+Internet Protocol (IP)
+
+Protocols that relate to this later include:
+Internet Control Message Protocol (ICMP)
+Routing Information Protocol (RIP)
+Open Shortest Path First (OSPF)
+
+IP is responsible for end-to-end packet delivery:
+	Provides logical addressing
+	Non-reliable
+	Loss of data
+	Data corruption
+	Used for routing data across networks
+Used to identify a device within a network
+	A portion of the address identifies the network
+	The remaining portion identifies the host
+Addresses are binary patterns
+	Written as dotten decimal notation if using IPv4
+	Written as hexadecimal notation if using IPv6
+32 bit binary address
+
+Subnet mask identifies which part of the IP address is the network part and the host/device part.
+1 in mask = network portion of ip address
+0 in mask = host portion of ip address
+
+
+Broadcast address = device id = host id
+
+Private address ranges for IPv4
+Used since private networks don't have to be unique
+
+Address Resolution Protocol (ARP)
+The ARP is the standard method for finding a host's hardware address when only its network layer address is known.
+It is not IP-only or Ethernet-only; it can be used to resolve many different network-layer protocol addresses to hardware addresses
+
+Network Address Translation (NAT)
+Router has two interfaces
+	One is assigned a Public IP address (external)
+	One is assigned a Private IP address (internal)
+Nat translates between internal and external IP addresses
+Process:
+1. Client sends packet to router
+2. Router maps internal IP address (iAddr) and internal port number (iPort) to an external IP address (eAddr) and external port number (ePort) and records these in a NAT table
+3. Data is sent across Internet with eAddr & ePort values
+4. Destination services respond back to eAddr & ePort
+5. Router checks NAT table for values and replaces eAddr & ePort with iAddr & iPort and forwards to specificed device
+
+IPv4 Limitations
+Public IP address exhaustion
+	IANA handed out the last IPv4 pools to RIR in Feb 2011
+	ARIN handed out last block in Sept 2015
+The original method of allocating addresses was inefficient
+	Methods were introduced to prolong the life of IPV4
+		CIDR & Route aggregation
+		NAT (broke end to end connectivity)
+IPv6 will be the long term solution
+
+IPv6 originally defined in RFC 1773, then RFC 2460, now RFC 8200
+128-bit addresses written in eight gorups of four hexadecimal digits
+Each group represents 16 bits
+
+Leading zeroes may be omitted: 0db8:0000:0000:0070 -> db8:0:0:70
+A single group of consecutive zeroes can be replaced with a double colon:
+85a3:0000:0000:8a2e -> 85a3::8a2e
+You can only have one double colon
+
+Types of IPv6 address
+Global unicast (2000::/3) for Internet communications
+Link-local (fe80) for communications within the same LAN/Segment/Subnet
+Unique local (fc00) similar to private IP addresses
+IPv6 does not use a broadcast address instead it uses multicast groups: ff00::/8
+
+Allocating IPv6 addresses
+IPv6 addresses can be allocated statically or dynamically
+	StateLess Address AutoConfiguration (SLAAC) is one way of allocating
+	SLAAC does nto need any server or relay because there is no state to maintain (RFC 2462)
+Routers within a network advertise their IPv6 network prefix that identifies the subnet(s)
+Hosts generate an interface identifier (the host portion) that uniquely identifeis an interface on a subnet
+	Can use MAC address (EUI-64)
+	Can be randomly generated (RFC 4941)
+An address is formed by combining the two: Network prefix + interface identifier
+
+Routers
+Have multiple network interfaces
+	Move IP datagrams from one interface to another
+consult a routing table to make decisions
+Two-part process
+	Routing: Deciding the correct path to the destination
+	Forwarding: Moving packets to the correct interface
+May perform other functions
+	Network Address Translation (NAT)
+	Firewall
+
+A routing table stores entries which are use for datagram forwarding:
+Routing table entries consist of the following:
+	Network ID
+	Next hop
+	May contain Metrics
+	Routing protocols allow routers to create routing tables
+
+Dynamic routing protocols
+Routers advertise networks they know about
+	Allows routers to build a map of the network
+Three main classes of routing protocol: Distance vector, link-state, hybrid
+Interior and Exterior Gateway Protocols
+
+Distance vector routing (not really a good protocol):
+Distance is the cost of reachign a destination, usually based onthe number of hosts the path pases through, or the total of all the administrative metrics assigned to the links in the path
+Vector is the interface that traffic will be forwarded outr in order to reach a given destination.
+
+Link-State routing:
+Protocols:
+- Require each router to maintain at least a partial map of the network
+- Know whetehr a link is up or down, how fast it is and calculate an overall cost to get there
+	- When a network link chagnes state (up to down, or vice versa), a notification, called a link state advertisement (LSA) is flooded throughout the network
+		All routers note the change, and recompute their routes accordingly
+- Will take a path which ahs more hops, but uses a faster medium instead of a path using a slower medium with fewer hops
+
+
+Dynamic Host Configuration Protocol (DHCP)
+DHCP provides automatic configuration of IP addressing
+	Requires a DHCP serever
+	Manages IP addresses and mask allocation from a pool of addresses
+		Other configuration options availabile (DNS, addresses, DGW address, WINS addresses)
+Client
+	Configured to use dynamic addressing
+	Leased the configuration for given period of time
+
+Client-side DHCP
+DHCP configues other aspects of IP addressing:
+	Default Gateway address
+	DNS Server addresses
+	WINS server address
+	To view IP information type ipconfig /all
+	Configuration is leased for a given period
+		Renewed at 50% of lease period
+		IP configuration can be released
+		IP address placed back into usable pool
+DHCP function - IPv6
+DHCP and DHCPv6 are known as stateful protocols because they maintain tables within dedicated servers.
+DHCPv6 uses UDP ports
+	Servers listen on UDP port 547
+	Clients listen on UDP port 546
+Messages
+	DORA - replaced with new messages (SARR)
+	SOLICIT (1), ADVERTISE (2), REQUEST (3), REPLY (7)
+
+Internet control Message Protocol (ICMP)
+Defined in RFC 792
+Used for control and information messages
+Reporting errors and diagnostic purposes
+Multiple message types available
+Header contains:
+	Type: define type of packet
+	Code: further specifies the ICMP type
+	Checksum: Used to error-check the ICMP header and data
+	The rest: varying data dependant on code and type
+
+Ping tests network connectivity, 4 packets
+Traceroute displays routers used to a given destination, 3 packets
+
+DNS resolution = DNS name -> IP address
+Two types of DNS query: DNS forward lookup - Known DNS name, unknown IP address
+
+Labs
+
+Lifou Island oceanic cables: Picot-1, TAMTAM, Gondwana-2/Picot-2
+Picot-1 Owned by OPT-NC, supplier ASN
+TAMTAM Owned by Interchange, supplier ASN
+Gondwana-2/Picot-2 Owned by OPT, supplier ASN
+
+RFC editor 1
+Internet Standard 86 is about IPv6, RFC 8200
 
