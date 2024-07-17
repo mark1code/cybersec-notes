@@ -221,7 +221,147 @@ Ping tests network connectivity, 4 packets
 Traceroute displays routers used to a given destination, 3 packets
 
 DNS resolution = DNS name -> IP address
-Two types of DNS query: DNS forward lookup - Known DNS name, unknown IP address
+Two types of DNS query: 
+
+DNS forward lookup - Known DNS name, unknown IP address
+[A] records resolve a name to an IP address
+
+DNS reverse lookup - Known IP address, unknwon DNS name
+[AAAA] records
+
+DNS Root servers
+	Store copies of the root zone database
+	Maps Top Level Level Domain names (TLDs) to authoritative DNS servers
+	13 named Root server authorities
+	More than 13 physical servers - accessed by anycast
+	Root Server address cached by DNS servers
+
+Caching DNS servers
+Most basic type of DNS server
+	Contains no authoritative zone databases
+	Performs recursive queries on behalf of clinets
+	Queries global DNS during recursive query
+Requires IP addresses of Root Servers
+	Root Hints file
+Answer to query is
+	Cached on the server
+	Passed to the client
+
+Authoritative DNS servers
+Host DNS zone databses
+Can make authoritative answers to DNS queries
+Zone database has a specific structure
+Used by both Windows servers and Unix servers
+
+Domain Names
+A domain name is a text string that can be mapped to an IP address
+domain names form the basis of the DNS
+	DNS is used to obtain the IP address of a device from its given domain name
+Internet Domains Names must be registered
+	Registration can be via a domain registrar
+Domain Names must be unique on the Internet
+domain Name Records are stored in zone files on name servers
+
+The Hosts file
+Text file containing hostname to IP address mappings
+	Contents loaded inot the DNS cache at system startup or if changes to the file are made
+Windows C:\windows\system32\drivers\etc
+Default entry is the loopback address
+Can be used as a security measure, but can also be poisoned
+
+DNS cache contains previous lookups
+Entries re-used to reduce load on DNS servers
+	Caches positive and negative responses
+	Cached data is timed out
+		Entries specifiy their own TTL
+Use ipconfig /displaydns to show cache contents
+ipconfig /flushdns to empty cache
+
+
+Layer 4 and 5 technologies
+
+User Datagram Protocol (UDP)
+Provides end-to-end data transfer between applications
+	Uses port numbers
+	No flow control
+	No connection setup
+	No lost data retransmission
+Useful in some situations
+	Single data packets
+	Voice over IP (VOIP)
+Defined in RFC 768
+
+UDP header structure
+Source port
+	Identifies sending port using 16 bits - optional
+Destination port
+	Identiies destination port using 16 bits - mandatory
+Length
+	Length of entire datagram in bytes - mandatory
+Checksum
+	16 bit checksum error-checking header and data - mandatory
+
+Transmission Control Protocol (TCP)
+Provides end-to-end data transfer between applications
+Uses port numbers
+TCP has flow control
+	Arranges data into byte stream
+Connection-oriented
+Acknowledges data receipt
+Used if sending multiple packets e.g web pages or .mp3 files
+Defined in RFC 793
+
+TCP header structure
+Complex header
+Includes: source/destination port, sequence number, acknowledgement number, offset, res, checksum, flag, window, urgent pointer, options
+32 bit options fields can be used if needed
+16 bit source/destination ports identify endpoints of the TCP connection
+
+
+3-Way handshake
+Begins every TCP conversation
+SYN packet:
+	Has the SYN flag set, contains sender's Initial Sequence Number (ISN)
+SYN/ACK packet:
+	Has SYN & ACK flags set
+	Contains receivers ISN
+	Acknowledgement number = sender's ISN + 1
+ACK packet
+	Has ACK flag set
+	Sequence number = ISN + 1
+	Acknowledgement number = receiver's ISN + 1k
+
+Ports and sockets
+A socket is one endpoint of a two way communication link between two programs running on a network
+A socket is bound to a port number so that TCP/UDP can identify the program that data is destined for
+A socket is a combination of an IP address and a port number -e.g 87.16.4.96:63584
+Every TCP or UDP session can be uniquely identified by its two endpoints
+Multiple sessions can be established between host and server
+
+Ports and port numbers
+There are 2^16 TCP & 2^16 UDP ports
+	Port numbers can be registered wiht IANA
+Ports 0 to 1023 - System ports / well-known range
+Ports 1024 to 49151 - User ports
+Ports 49152 to 65535 - Dynamic ports
+
+Example ports and services
+Web browsing protocols and corresponding port numbers
+HTTP uses port 80 on the web server b default
+	Data sent via HTTP is not encrypted
+HTTPS uses port 443 on the web servers by default
+	Data sent by HTTPS is encrypted
+
+An email protocol and corresponding port number
+POP3 uses port 110 on the email server by default, not encrypted
+POP3S usese port 995 on the emial server by default, encrypted
+
+Services: web server, email server
+Ports: 80, 110
+Internet Protocol: IP Address
+Network card: Data arrives and leaves device
+
+
 
 Labs
 
