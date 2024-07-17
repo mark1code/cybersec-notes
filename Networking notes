@@ -361,6 +361,224 @@ Ports: 80, 110
 Internet Protocol: IP Address
 Network card: Data arrives and leaves device
 
+Client ports
+Client applications allocated dynamic port numberse when launched
+	IANA dynamic ports 49152-65535
+Ports are ephemeral
+	Temporary allocation
+	When connection closed, port mapping removed
+
+netstat (Network statistics)
+Command-line tool displays network connections for TCP
+Can also display routing tables and network interface/protocol stats
+Syntax: -a = connections and listening ports,
+	-b = binary executable that made the connection
+	-o = owning process id
+	-s = per-protocol statistics
+	-r = routing table
+	-p = for the protocol only eg netstat -p UDP
+
+Layer 6 - The presentation layer
+Concerned with transforming data into a format that can be transmitted across a network, but also to convert data from a network into a format the application layer services can process.Done through: Encoding, Declaring media types, Compression
+
+Encoding
+Character encoding is used to represent a collection of characters by some kind of encoding algorihtm
+A single characater, when encoding is termed a code point
+A collection of code points is termed a code space
+Code points an dcode spaces may be regarded as bit patterns, octets, natural numbers, electrical pulses, etc which can be used for network transfer
+E.g 
+ASCII - American Standard Code for Information Interchange, limited set
+ISO-8859-1 - Latin alphabet no.1, 191 chars from Latin script
+Unicode - A global encoding system containing over 1 Million code points including emoji
+Windows-1252 - Used by default in legacy components of Windows
+
+URL encoding
+URLS can only be transmitted using the ASCII character-set
+URLs often contain character s outside the ASCII format
+	So the URL has to be converted into a valid ASCII format
+URL encoding replaces unsafe ASCII characters with a % followed by two hexadecimals digits
+	a space = %20
+	ampersand = %26
+	equals = %3D
+
+
+Base64
+Base64 is binary-to-text encoding scheme that represents binary data in an ASCII string format by translating it into a radix-64 representation
+	Each Base64 digit represents exactly 6 bits of data
+	Three 8-bit bytes (24 bits) can therefore be represented by four 6-bit Base64 digits
+Text which does not divide into the 6-bit pattern cleanly is padded using the = sign
+Some emial spam filters cannot process multiple iterations of base64 encoded data, which allows the spam messages to reach the destination mailbox
+
+Media types
+A media type is standard identifier used on the Internet to indicate the tpye of data that a file contains
+Used to be called MIME types
+	Multipurpose Internet Mail Exchange
+Allows mapping between data and application
+Originally used for SMTP
+Now used by HTTP and other systems
+2 part definitions
+	Type/subtype
+		Audio/mpeg
+		File/txt
+		Image/jpg
+Registered with IANA
+
+
+Layer 7 Technologies
+
+HyperText Transfer Protocol
+Designed to transfer HTML web pages (now can do many types)
+
+8 methods:
+	GET requests a resource
+	POST submits data to a resource
+	PUT uploads to a resource
+	HEAD used to request only the head section of a webpage
+Commands sent by client user agent (brwoser)
+commands received by web server
+
+
+HTTP server response scodes
+Sent by web server to indicate status of an operation
+HTTP server status code categories:
+1xx - information
+2xx - success
+3xx - redirection
+4xx - client request error
+5xx - server error
+
+HTTP method request headers
+HTTP method request headers characaterise requested data
+Most headers set by pbrowser - cannot be altered directly
+Plug-ins can alter header values
+Commonly used headers include
+	Host - domain name of required resource
+	Used when multiple sites share an IP address
+	User-agent - identifies application and OS used to create request
+	Can be altered- firefox plug-in
+	Accept - acceptable content types
+	Cookies - indicates sending of cookie
+
+Response headers
+HTTP server response headers characterise data sent by server
+commonly used headers include
+Server - name of web server
+Set-cookie - contains cookie data
+Cache-control - how data must be cached
+Content-language - language of the data
+Content-type - mime type of content
+ETag - version identifier of resource
+
+
+HTTP cookies
+HTTP is a stateless protocol
+	Web server requires means of identifying users
+	A cookie is a text file stored in user's profile on a given host
+	Browser checks for presence of a cookie for every HTTP request
+	If a cookie is present it will be sent with the HTTP request
+
+Email application software
+Protocols:
+Store and forward method of sending electronic messages
+	Client devices are known as Mail User Agents (MUAs)
+	Email servers are known as Mail Transfer Agents (MTAs)
+Uses a number of protocols for sending and receiving data
+	Simple Mail Transfer Protocol (SMTP)
+	Post Office Protocol v3 (POP3)
+	Internet Message Access Protocol (IMAP)
+Webmail systems allow a user to access the MTA via HTTP / HTTPS
+	Messages delivered via SMTP
+
+SMTP
+Uses port 25 by default
+Used to deliver mail - known as push protocol
+	Used by MUA to deliver to MTA
+	Used by MTA to deliver to MTA
+Defined in RFC 821
+Updated in RFC 5321
+	Known as Extendd SMTP (ESMTP)
+Headers
+Contain information about the message
+	when message passes through an MTA it adds line to the header
+	Used to track the message through the Internet
+	X-headers (Extension headers) are proprietary, non standard information fields which can be used when tracking email delivery faults
+
+POP3
+Uses port 110 by default
+POP3S (Secure POP3) uses port 995 for encrypted connections using TLS
+Used to collect messages - known as a pull protocol
+	MUA pulling data from MTA
+Defined in RFC 1939
+Extensions defined in RFC 2449
+
+IMAP
+Uses port 143 by default
+	Encrypted connections on port 993
+Used to read messages on the MTA
+	Downloading of messages optional
+	Deleting of messages optional
+Multiple user scan access a mailbox simultaneously
+Defined in RFC 3501
+
+Voice over Internet Protocol (VoIP)
+VoIP as a term has evolved to mean any voice communication over an IP network
+The International Telecommunications Union defines different kinds of voice transmission over IP networks
+	IP Telephony
+	Internet Telephony
+	VoIP
+VoIP uses many different protocols, but the most widely used ones are:
+	Session Initiaion Protocol (SIP)
+	H.323
+	Real-time Transport Protocol (RTP)
+	Real-time Transport Control Protocol (RTCP)
+
+Session Initiation Protocol (SIP)
+SIP is used in VoIP networks to set up and tear down calls
+	Does not carry voice data
+Much of the message syntax and header fields are identical to HTTP
+	Request / response headers
+Sample headers include:
+	REGISTER | Usd by a User Agent to identify its current IP address and the URLs for which it would like to receive calls
+	INVITE | Used to establish a media session between User Agents
+	ACK | Confirms reliable message exchanges
+	CANCEL | Terminates a pending request
+	BYE |  Terminates a session between two users in a conference
+
+RTP & RTP Control Protocol (RTCP)
+RTP is used in most VoIP systems to transfer voice or other data
+	Uses UDP as transport layer protocol for streaming data
+	No defined port - selects random even port
+RTP is used in conjunction with RTCP
+RTP provides
+	Payload identification
+	Sequence numbering
+	time stamping
+RTCP provides
+	Transmission stats
+	Quality of Service
+	Synchronisation of multiple data streams
+
+Telnet & SSH
+Telnet - developed in 1969
+	One of the earliest Internet protocols (RFC 15)
+Runs over port 23
+Provides the suer with a CLI on a remote host
+Does not use encryption or authentication
+Vulnerable to eavesdropping & hijacking
+Most Telnet services now replaced wiht SSH
+SSH runs over port 22
+	Typically uses encryption
+
+
+File Transfer Protocol (FTP)
+Used for file transfer between network hosts
+Uses TCP ports 20 and 21
+	Control messages user port 21
+	Data transferred on port 20
+FTP authentication is in clear text
+	Many servers allow annonymous FTP
+Data transfers uses one of the four data representations: ASCII, Image, EBCDIC, Local
+FTP is not natively encrypted
 
 
 Labs
