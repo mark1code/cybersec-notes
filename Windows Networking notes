@@ -1,0 +1,250 @@
+Work groups & Domains
+
+Workgroups
+	All computers are peers, no single computer has control
+	To login to a computer, you require an account for each computer. Passwords are stored locally in the Security Accounts Manager file
+	All computers must be on the same local network
+	Workgroups are not password protected; computers in the Workgroup provide their own security
+Domains
+	A type of a network in which all user accounts, computers, printers are registered with a central database located on one or more clusters of central servers known as domain controllers
+	Users, computers, etc are known as security principles
+	Authentication takes place on domain controllers
+	Security and usage policies managed on Dopmain Controller and applied to users, groups and organisational units
+
+Windows server versions
+2008
+	Included Hyper-V
+	Introduced Server Manager tool
+	Introduced Server Core (no GUI)
+	Remote Desktop Services (replaced Terminal Services)
+2012
+	Added support for Cloud
+	Hyper-V improved
+	Updated PowerShell
+2016
+	New Nano Server option (reduced attack surface)
+	Support for containers (making apps easier to deploy and manage)
+	Added easy management for physical and virtual devices
+2019
+	Windows Admin Centre (new administrator management panel)
+	Managemet of virtualised services without downtime
+	Native VM support for Linux
+	Advanced Threat Protection (ATP)
+2022
+	Azure Edition (helps to use benefits of the cloud)
+	SMB over QUIC
+	Hotpatching
+
+Windows client and server software
+	Client
+	Windows 8,10,11
+	Legacy Systems XP, Vista, 7
+Server
+	Server 2016, 2019, 2022
+	Legacy Systems NT, 2003, 2008, 2012
+
+Windows server administration tools
+Server Manager
+	A built-in  management tool available in Windows Server versions since Server 2008
+Remote SErver Administration Tools (RSAT)
+	Manages remote server from a Windows client
+Windows Admin Center
+	Introduced wiht 2019 server
+	Is installed as a network service. You must specify the port that the service listens on, and it requires a certificate for HTTPS
+	Multiple users can access Windows Admin Center using a web browser
+	When you install Windows Admin Center on Windows 10, it uses port 6516 by default
+
+Windows Server roles
+	Microsoft Windows Server can perform many roles in an enterprise
+	Active Directory Domain server
+	File & Print services
+	Web services
+	DNS server
+	DHCP server Backup server
+	WINS server
+	Remote access server
+
+Active Directory
+A directory servfice stores, organises and provides access to information in a directory
+Directory services are used for locating, managing, administering and organising common items and network resources, such as folders, files, printers, users, groups, devices and other objects network resources, such as folders, files printers, users, groups , devices and other objects
+Active Directory is a type of directory service
+	Active Directory allows you to organise network resources, including users, gorups, printers, computers and other objects so that you can assogn passwords, permissions and rights to the users on your network
+	You can also assign who can manage a group of objects
+		An Object is ap articular set of attributes that represent something, like a user, a printer or an application
+		Objects are identified by Globally Unique IDentifiers (GUID)
+
+Domains, trees and forests (1)
+Active Directory domains, tree, and forests are logical representations of your network organisation, which allow you to manage them
+To identify domains, trees and forests, Active Directory is closely tied to Domain Name Services (DNS)
+A domain is a logical unit of computers and network resources that define a security boundary
+
+A domain uses a single Active Directory  database to share
+	Its common security and user account information for all copmuters within the domain
+		This allows an administrator to centrally manage all users, groups and resources on the domain that they control
+	A domain is identified by a domain name, e.g. chips.com
+
+Domains, trees and forests (2)
+A tree is made up of one or more domains; this enables an organisation to create different domains for different parts of its organisation for example:
+	research.sisimiut.com
+	admin.sisimiut.com
+	Both domains are child domains of sisimiut.com
+A forest is made up of one or more trees. So for example, one company might buy another company who has similar services, and already ahve their own domains and tree:
+	sisimiut.com
+	holsteinsborg.com
+A forest automatically creates a two-way trust between the two trees but they are able to keep their separate domain names
+
+Windows Internet Name Service (WINS)
+NetBIOS (Network Basic Input/Output System) is a program that allows applications on different computers to communicate within a LAN using NetBIOS names
+WINS provides a dynamic replicated db service that can register and resolve NetBIOS names to IP addressres that are used on your network
+Whilst most modern OS, applications and programs use DNS names, some legacy components of Windows still rely on NetBIOS names
+
+User accounts
+A user account represents a physical entity, a person. User accounts are used for 4 things:
+	Authenticate the identity of a user or computer
+		A user account allows an individual's identity to be authenticated on the domain that they are logging into
+	Authorise or deny access to domain resources
+		Once a user is authenticated, access can be granted or denied based on the permissions defined on the resource that they are trying to access
+	Administer other security principals
+	Microsoft defines security principals essentially as the entities that will be trying to access resources, whether that is a computer, a user, a group of users or a process
+		Each security principal is given a unique security identifier (SID)
+		Audit actions performed using the user or computer account
+
+Security groups
+Used to combine users and computers together so taht when you assign rights and permissions you assign them to the group rather than to individual objects
+Distribution groujps
+	Used to create email distribution lists
+	Not used to assign permissions to objects
+Group scope
+	Identifies the extent to which the settings apply in the domain, tree, or forest
+		Universal, Global, domain Local, Local
+
+Permissions and rights
+Access is controlled by assigning rights to users and by setting permissions for objects
+Permissions on an object define which suers can access the object and their type of access
+	For example, a Word doc will have permissions for particular users and groups. The permissions will specify if they ar allowed to read or modify the file
+	The rights of users can be changed to give them more or less access/control over an object
+
+Organisational Units
+OUs are containers which can be used to help organise administration task in a domain
+You can place Computers, Users and Groups inside OUs
+OUs make it easy to apply a specific policy to a group of Users or Computers
+OUs simplify the process of delegating the control of objects
+
+Delegate control
+Forests, trees, domains and OUs allow us to build a Windows network that reflects an aorganisations structure
+Delegation of tasks enables the delegation of specific tasks without losing control of the overall network
+Admins have lots of power
+	This level of power can be dangerous in the wrong hands
+Delegation of tasks gives specific groups the authority to undertake specific routine tasks:
+	Create/delete users
+	Create/delete groups
+	Reset passwords
+	Manage policy
+
+Security Tools
+
+Microsoft Security
+Authentication
+	How do we confirm the identity of a person or entity before granting access to a resource
+		SAM files (Workgroup), Kerberos (Domain), Certificates, Legacy NTLM
+Authorisation/Access control
+	How do we restrict the access to data and resources to specific users?
+		Discretionary Access Control List (DACL), OAuth (Azure AD)
+Confidentiality
+	How do we ensure the privacy of data that we store or send?
+		Store - Encrypted File System (EFS) & BitLocker
+		Send - SSL/TLS, IPSEC
+
+Authentication - using Kerberos
+
+1. User authenticates to Domain controller Authentication Service (AS)
+2. User receives Ticket Granting Ticket
+3. User presents TGT to Ticket Granting Service (TGS) asking for ticket for File server
+4. User receives ticket for file server
+5. User presents ticket to file server
+6. Ticket validity checked with TGS
+7. File server grants access
+
+Access Control
+Authentication is the first layer of security
+Access control is the second layer
+Access control is:
+	Which resources can be accessed by whom
+	What permission do they have (r/w etc)
+A user who is authenticated may not have the appropriate authority to access a file or a printer
+Access is controlled by assigning rights to user and by setting permissions for objects
+Group of users have their own rights, permissions can be set for users and groups
+Permissions can be explicit or inherited from parent objects
+	E.g. setting folder permissions affects access to the files within
+
+Access Control Lists (ACLs)
+Objects are protected using Security Descriptors. The Descriptor identifies the object owner contained in the following Access Control Lists:
+	A Discretionary ACL (DACL) that identifies the users and groups allowed or denied access to the object
+	A system Access Control List (SACL) that controsl how the system audits attempts to access the object
+
+ACLS contrain a list of access control entries (ACEs):
+	Each ACE specifies a set of access rights and contains a SID that identifies an entity for whom the rights are allowed, denied or audited
+
+Discretionary Access Control Lists (ACLs)
+
+DACLs identify the users and groups that are assigned or denied access permissions on an object
+	If a DACL does not explicitly identify a user, or any groups that a user is a member of, the user will be denied access to that object
+
+Inheritance
+By default:
+	Objects inherit their permission from their parent object
+		A file will inherit the permissions of its folder
+		A file will inherit the permissions of its share
+
+ACEs are ordered so that explicit permissions are checked first:
+	1 - Explicit ACES denied
+	2 - Explicit ACES allowed
+	3 - Inherited ACES denied
+	4 - Inherited ACES allowed
+If no matches are found access is denied
+
+Group policy
+Allows a network administrator to implement specific configurations across the entire domain
+Can be set at different levels:
+	Local
+	Site
+	Domain
+	Organisation Unit
+Group Policy is applied at log-on, but Group Policy is also refreshed every 90 minutes
+Can be manually updated via gpupdate /force
+
+Group Policy Objects
+A Group Policy Object (GPO) is a virtua lcollection of policy settings
+Each GPO has a unique name, such as GUID
+Group Policies are managed via the GPO Editor
+A series of built-in templates makes defining Group Policy easier
+
+Networking protocols
+
+Windows server protocol
+Active Directory is a technology created by Microsoft that provides a variety of network servrices, including:
+	Lightweight Directory Access Protocol (LDAP)
+	Kerberos-based and single sign-on authentication
+	DNS-based naming and other network information
+	A central location for network administration and delegation of authority
+
+Lightweight Directory Access Protocol (LDAP)
+LDAP is an application protocol for reading and writing directories over an IP-based network, typically port 389 (TCP/UDP) or port 636 (LDAPS SSL/TLS)
+
+Based on X500 directory service, designed as a lightweight alternative.
+Uses Distinguised Names (similar to DNS and used in AD)
+
+Server Message Block (SMB)
+The protocol allows a client to manipulate files just as if they were on the local computer
+Operations such as:
+	Read
+	Write
+	Create
+	Delete
+The SMB protocol works by sending packets from the client to the server
+	Each packet is typically a basic request of some kind, such as open file, close file or read file
+The server then receives the packet, checks to see if the request is legal, verifies the client has the appropriate file permissions, and finally executes the request and returns a response packet to the client
+The client then parses the response packet and can determine wheter or not the initial request was successful
+
+SMB1,2 no encryption; SMB3 has encryption
+SMB3.1.1c better security against MITM, improved encryption protocol support.
