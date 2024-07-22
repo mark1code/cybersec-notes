@@ -1,0 +1,145 @@
+Targeted Attacks
+
+5 basic Cyber Security Essentials control themes:
+	Secure your Internet Connection
+	Secure your devices and software
+	Control Access to your devices and Software
+	Keep your devices and software up to date
+	Protect from viruses and malware
+
+Threats and threat actors
+Threats came from a range of actors
+Threat actors use a range of methods
+Attacks can be targeted or untargeted
+Can have significant impact
+	Steal critical and sensititve data
+	Disrupt public services
+	Affect food and energy supplies
+	Financial costs (ransom/downtime/recover)
+State Sponsored: Hafnium, Fancy Bear, Cozy Bear
+Organised Crime Groups: LockBit, DarkSide, Rhysida
+
+MITRE ATT&CK Framework: A globally-accessible knowledge base of adversary tactics and techniques based on real-world observations.
+
+Security Operations Centre (SOC)
+Aimed to detect and prevent cyber attacks
+	Limit damage to an organisation
+	Can include vulnerability assessment and compliance activities
+Organisations will need to consider
+	The purpose of SOC
+	The threats they face
+	Assets that need to be monitored
+	Proporitionate capability of the SOC
+	Onboarding systems to the SOC
+	Log and data sources
+	Threat Intelligence gathering and sharing
+	Incident Management
+
+Intrusion Detection and Protection Systems
+An IDS provides a way to monitor a host, or network, to detect an intrusion
+An Intrusion Prevention System (IPS) can control network devices, such as routers and firewalls, so that an intrusion can be prevented once detected
+Often IPS are built into devices such as routers so that they can easily modify access control lists, firewall rules and routing tables to block an attack
+IDS/IPS increasingly report to a cloud-based analytics service, so that an attack against one network will winform the defences of all those using the service
+
+IDS/IPS Host vs Network based
+Host based to protect an individual host: e.g. webserver (HIDS)
+Network based to protect many hosts on a network (NIDS)
+	Positioning of an IDS/IPS is an important consideration
+	HTTPS Traffic Management might be required for the IDS/IPS to function correctly
+
+IDS/IPS Traffic Volume
+	Detection Engine: Produces alerts/actions
+	Event Engine: Filter for Security Related Events
+	Libpcap: TCP Dump Filters
+	Network: Ingest packets
+Network based IDS/IPS have to handle huge amounts of traffic, therefore filtering is required
+Each layer reduces the volume of data being processed
+Each layer removes data that is unlikely to aid the detection of malicious activity
+
+Types of IDS/IPS
+Statistical Anomaly-based (Monitors traffic & events against a pre-set baseline of acceptable use)
+	Protocols used
+	Peak traffic times
+	Services/ports used
+	Can trigger false-alarms if baseline not configured properly
+Signature-based (Compares data packets against a known signature database)
+	Similar in operation to Anti-malware
+	Risk of a lag between live attacks and database update
+
+IDS/IPS problems
+Configuration is difficult to get right
+	Many settings to fine-tune
+Noisy networks will trigger false-positives
+	Bad network cards
+	Software bugs
+	Corrupt DNS data
+	Real attacks can be missed amongst the noise
+Cannot process encrypted packets
+Difficult to detect spoofed packets
+Vulnerable to TCP/IP based attacks
+Cannot detect fragmentation attacks
+Difficult to detect attacks from multiple, co-ordinated sources
+
+SNORT
+SNORT  IDS/IPS combines Signature/Protocol/Anomaly based detection
+OTHER open sources are available: SAGAN, SAMHAIN
+McAfee, Cisco, Trend Micro etc. all make IDS/IPS
+SNORT rules are compatible with many other platforms
+
+E.g. SNORT rule:
+log tcp any any -> 10.0.0.1/24 25 (content: mail from:admin; msg: email sent from admin account)
+Breakdown:
+	log and alert if a TCP connection is detected from:
+	ANY IP address and ANY port if :
+	it is attempting to communicate with any host on the 10.0.0.1/24 network using:
+	(SMTP) port 25 which contains the following email header:
+	mail from admin and the following email message:
+	email sent from admin account
+
+SIEM Systems
+
+Security Silos
+Each technology that we use have seen creates its own set of events and logs: e.g firewall logs, server logs, IDS alerts, NMS logs/events, EUD logs
+Difficult for a human to tie all of this information together
+Some log files are difficult to obtain and understand
+Analysis in real time is difficult
+No synchronisation
+
+SEM, SIM, SIEM & SOAR
+Security Event Manager (SEM)
+	Report on security events in real-time
+Security Information Manager (SIM)
+	Dael with log-term archival, manipulation & reporting on events captured by SEM tools
+Security Information and Event Management
+	SIEM tools combine the activities of the above tools as well as having a vulnerability database and compliance dashboard to aid security policy implementation
+Security Operations, Analysis and Reporting
+	SOAR technologies utilise machine-readable and stateful security data to provide reporting, analyiss and management capabilities
+
+Benefits of SIEM
+Increased efficiency
+Preventing potential security breaches through early identification and action
+Increased visibility of reporiting, log collection, analysis and retention
+Potential reduction in the impact of security events
+Potential money savings
+Help meet IT compliance requirements
+Speed up forensics
+
+Examples of SIEM providers
+
+Splunk
+Captures, indexes and correlates real-time machine data in a searchable repository
+	Used to generate graphs, reports, alerts, dashboards and visualisations
+Darktrace - the Enterprise Immune System
+Darktrace does not analysze soges - Darktrace monitors raw network traffic
+	Automatically learns the complex relationships between devices and users
+	By understanding of what is normal within the business, Darktrace can identify emerging threats that have bypassed traditional defenses and are active within the network
+Darktrace is abel t obe configured to fit into most SIEM dashboards
+	Alerts from threats detected by the Enterprise Immune System can be sent via the SIEM
+
+Open-Source logging
+Not all companies can afford to run a SOC
+Not all companies can afford to run & manage a complex SIEM
+E.g
+Security Onion: free and open linux distriubtion for enterprise security monitoring, log management and threat hunting
+Endpoint events can be forwarded to a collection service which in turn are sent to an ELK-stack database for display and analysis (Elastic Search/Kibana)
+For larger networks, Windows Event Forwarding (WEF) can be used for intrusion detection
